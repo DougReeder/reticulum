@@ -4,6 +4,7 @@
   "name": "<%= @app_name %>",
   "description": "<%= @app_description %>",
   "short_name": "<%= @app_name %>",
+  "categories": ["social", "multimedia"],
   "icons": [
     {
       "src": "<%= @root_url %>/app-icon.png",
@@ -27,11 +28,11 @@
     }
   ],
   "scope": "/",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#000",
-  "background_color": "#000",
+  "theme_color": "#12A4ED",
+  "background_color": "#2B313B",
   "serviceworker": {
     "src": "hub.service.js",
     "scope": "/",
