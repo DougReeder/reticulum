@@ -722,7 +722,16 @@ defmodule RetWeb.PageController do
       opts =
         ReverseProxyPlug.init(
           upstream: thumbnail_url,
-          client_options: [ssl: [{:versions, [:"tlsv1.2"]}]]
+          client_options: [
+            ssl: [
+              {:server_name_indication, to_charlist(host)},
+              {:versions, [:"tlsv1.2", :"tlsv1.3"]},
+              {:verify, :verify_peer},
+              {:partial_chain, :auto},
+              {:cacerts, :public_key.cacerts_get()},
+              {:depth, 3}
+            ]
+          ]
         )
 
       body = ReverseProxyPlug.read_body(conn)
@@ -794,7 +803,14 @@ defmodule RetWeb.PageController do
             client_options: [
               ssl: [
                 {:server_name_indication, to_charlist(authority)},
-                {:versions, [:"tlsv1.2", :"tlsv1.3"]}
+                {:versions, [:"tlsv1.2", :"tlsv1.3"]},
+                {:verify, :verify_peer},
+                {:partial_chain, :auto},
+                {:cacerts, :public_key.cacerts_get()},
+                {:depth, 3},
+                customize_hostname_check: [
+                  match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+                ]
               ]
             ]
           )

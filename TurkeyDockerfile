@@ -33,6 +33,6 @@ RUN mkdir -p /storage && chmod 777 /storage
 WORKDIR ret
 COPY --from=builder /_build/turkey/rel/ret/ .
 COPY --from=certr /certs .
-RUN apk update && apk add --no-cache bash openssl-dev openssl jq libstdc++ coreutils
+RUN apk update && apk add --no-cache bash openssl-dev openssl jq libstdc++ coreutils ca-certificates
 COPY container/prod-run.sh /run.sh
 CMD bash /run.sh
