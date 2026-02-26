@@ -1,5 +1,5 @@
 defmodule RetWeb.Email do
-  use Swoosh.Email
+  import Swoosh.Email
   alias Ret.{AppConfig}
 
   def auth_email(to_address, signin_args) do
