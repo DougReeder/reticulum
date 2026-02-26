@@ -23,7 +23,7 @@ defmodule RetWeb.Email do
         else: add_magic_link_to_custom_login_body(custom_login_body, signin_args)
 
     email =
-      new_email()
+      new()
       |> to(to_address)
       |> from({app_full_name, from_address()})
       |> subject(email_subject)
